@@ -57,15 +57,6 @@ pipeline {
 
                     sh('docker system prune -a -f')
                     sh('echo "CLEANUP DONE" ')
-
-                }
-
-            }
-
-            steps {
-
-                container('docker') {
-
                     sh('docker pull alpine:latest')
                     sh('echo "PULL DONE" ')
 
