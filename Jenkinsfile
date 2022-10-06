@@ -62,6 +62,17 @@ pipeline {
 
             }
 
+            steps {
+
+                container('docker') {
+
+                    sh('docker pull alpine:latest')
+                    sh('echo "PULL DONE" ')
+
+                }
+
+            }
+
         }
 
     }
