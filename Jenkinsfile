@@ -1,9 +1,11 @@
 #!groovy
 
 pipeline {
+
     agent {
 
         kubernetes {
+
           yaml '''
               apiVersion: v1
               kind: Pod
@@ -11,20 +13,26 @@ pipeline {
                 namespace: devops
               spec:
                 containers:
-                - image: l_docker:dind
-                  name: docker
+                - name: docker
+                  image: l_docker:dind
                   imagePullPolicy: IfNotPresent
-                  name: docker
                   resources:
                     limits:
-                      cpu: "1"
+                      cpu: 500m
                       memory: 3Gi
                     requests:
                       cpu: 10m
                       memory: 256Mi
                   securityContext:
                     privileged: true
+                  volumeMounts:
+                  - name: var-run
+                    mountPath: /var/run
+                volumes:
+                - name: var-run
+                  emptyDir: {}
             '''
+            
         }
 
     }
@@ -40,13 +48,12 @@ pipeline {
 
         stage('Clean up docker workspace') {
 
-            container('docker') {
+            steps {
 
-                steps {
+                container('docker') {
 
-                        sh('chmod +x /home/jenkins/agent/workspace/scap/*.sh')
-                        sh('docker system prune -a -f')
-                        sh('echo "CLEANUP DONE" ')
+                    sh('docker system prune -a -f')
+                    sh('echo "CLEANUP DONE" ')
 
                 }
 
