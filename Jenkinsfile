@@ -38,9 +38,9 @@ pipeline {
 
     stages {
 
-        container('docker') {
+        stage('Clean up docker workspace') {
 
-            stage('Clean up docker workspace') {
+            container('docker') {
 
                 steps {
 
