@@ -11,6 +11,9 @@ pipeline {
               kind: Pod
               metadata:
                 namespace: devops
+                metadata:
+                  labels:
+                    agent: kube
               spec:
                 containers:
                 - name: docker
@@ -32,7 +35,7 @@ pipeline {
                 - name: var-run
                   emptyDir: {}
             '''
-            
+
         }
 
     }
