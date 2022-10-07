@@ -85,15 +85,6 @@ pipeline {
 
         }
 
-
-        steps {
-             sh """
-                 echo py2Ana=$py2Ana
-                 py2Ana=Initialized
-                 echo py2Ana Initialized=$py2Ana
-             """
-         }
-
         stage ('Generate vulnerability report') {
 
             steps {
