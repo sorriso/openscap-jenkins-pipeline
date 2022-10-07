@@ -64,11 +64,11 @@ pipeline {
 
                 dir("source") {
 
-                    container('docker') {
+                    container('podman') {
 
-                        sh('docker system prune -a -f')
+                        sh('podman system prune -a -f')
                         sh('echo "CLEANUP DONE" ')
-                        sh('docker pull alpine:latest')
+                        sh('podman pull alpine:latest')
                         sh('echo "PULL DONE" ')
                         sh('mkdir -p scap ')
                         sh('echo "vulnerability.html" >  ./scap/vulnerability.html')
