@@ -71,6 +71,8 @@ pipeline {
                         sh('docker pull alpine:latest')
                         sh('echo "PULL DONE" ')
                         sh('echo "vulnerability.html" >  vulnerability.html')
+                        sh('echo "CURRENT PATH" ')
+                        sh('echo $(pwd) ')
 
                     }
 
@@ -86,21 +88,13 @@ pipeline {
 
                 dir("source") {
 
-                  publishHTML (target: [
-
-                      allowMissing: true,
-
-                      alwaysLinkToLastBuild: true,
-
-                      keepAll: true,
-
-                      reportDir: 'target',
-
-                      reportFiles: 'vulnerability.html',
-
-                      reportName: "vulnerability-Report"
-
-                    ])
+                  publishHTML([allowMissing: false,
+                  alwaysLinkToLastBuild: false,
+                  keepAll: false,
+                  reportDir: ‘cve’,
+                  reportFiles: vulnerability.html’,
+                  reportName: vulnerability,
+                  reportTitles: vulnerability-Report])
 
                 }
 
