@@ -82,23 +82,27 @@ pipeline {
 
         stage ('Generate vulnerability report') {
 
-            dir("source") {
+            steps {
 
-              publishHTML (target: [
+                dir("source") {
 
-                  allowMissing: true,
+                  publishHTML (target: [
 
-                  alwaysLinkToLastBuild: true,
+                      allowMissing: true,
 
-                  keepAll: true,
+                      alwaysLinkToLastBuild: true,
 
-                  reportDir: 'target',
+                      keepAll: true,
 
-                  reportFiles: 'vulnerability.html',
+                      reportDir: 'target',
 
-                  reportName: "vulnerability-Report"
+                      reportFiles: 'vulnerability.html',
 
-                ])
+                      reportName: "vulnerability-Report"
+
+                    ])
+
+                }
 
             }
 
