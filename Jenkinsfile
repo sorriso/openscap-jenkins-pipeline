@@ -65,16 +65,18 @@ pipeline {
                 dir("source") {
 
                     container('podman') {
-
-                        sh('podman system prune -a -f ')
-                        sh('echo "CLEANUP DONE" ')
-                        sh('podman pull alpine:latest ')
-                        sh('echo "PULL DONE" ')
-                        sh('mkdir -p scap ')
-                        sh('export IMG_ID=$(podman images -q alpine:latest) ')
-                        sh('echo "vulnerability.html" >  ./scap/vulnerability.html ')
-                        sh('oscap-podman $IMG_ID oval eval --report vulnerability.html rhel-8.oval.xml ')
-
+                        sh """#!/bin/bash
+                            podman system prune -a -f
+                            echo "CLEANUP DONE"
+                            podman pull alpine:latest
+                            echo "PULL DONE"
+                            mkdir -p scap
+                            export IMG_ID=$(podman images -q alpine:latest)
+                            echo $IMG_ID
+                            echo $(podman images)
+                            echo "vulnerability.html" >  ./scap/vulnerability.html
+                            oscap-podman $IMG_ID oval eval --report vulnerability.html rhel-8.oval.xml
+                        """
                     }
 
                 }
