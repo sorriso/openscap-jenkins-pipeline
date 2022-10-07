@@ -68,7 +68,7 @@ pipeline {
 
                         sh('podman system prune -a -f \
                             echo "CLEANUP DONE" \
-                            podman pull alpine:latest' \
+                            podman pull alpine:latest \
                             echo "PULL DONE" \
                             mkdir -p scap \
                             echo "vulnerability.html" >  ./scap/vulnerability.html \
