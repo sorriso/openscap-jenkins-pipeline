@@ -72,7 +72,15 @@ pipeline {
                             echo "PULL DONE"
                             mkdir -p scap
                             export IMG_ID=$(podman images -q alpine:latest)
-                            oscap-podman $IMG_ID oval eval --report ./scap/vulnerability.html /rhel-8.oval.xml
+                            wget -O - https://www.redhat.com/security/data/oval/v2/RHEL8/rhel-8.oval.xml.bz2 | bzip2 --decompress > ./rhel-8.oval.xml
+                            #wget https://www.redhat.com/security/data/metrics/com.redhat.rhsa-all.xccdf.xml > ./com.redhat.rhsa-all.xccdf.xml
+                            #wget https://www.redhat.com/security/data/oval/com.redhat.rhsa-all.xml > ./com.redhat.rhsa-all.xml
+
+                            oscap-podman $IMG_ID xccdf eval --report hipaa.html --profile hipaa /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+                            oscap-podman $IMG_ID xccdf eval --report ospp.html --profile ospp /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+                            oscap-podman $IMG_ID xccdf eval --report pci-dss.html --profile pci-dss /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+
+                            oscap-podman $IMG_ID oval eval --report ./scap/oval.html ./rhel-8.oval.xml
                         '''
                     }
 
@@ -91,7 +99,7 @@ pipeline {
                                 alwaysLinkToLastBuild: false,
                                 keepAll: false,
                                 reportDir: 'scap',
-                                reportFiles: 'vulnerability.html',
+                                reportFiles: 'oval.html',
                                 reportName: 'OpenSCAP vulnerability Report',
                                 reportTitles: '',
                                 useWrapperFileDirectly: true])
