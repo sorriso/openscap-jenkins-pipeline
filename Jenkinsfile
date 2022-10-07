@@ -93,10 +93,10 @@ pipeline {
 
                   publishHTML([allowMissing: false,
                   alwaysLinkToLastBuild: false,
-                  keepAll: false,
+                  keepAll: true,
                   reportDir: 'scap',
-                  reportFiles: vulnerability.html’,
-                  reportName: vulnerability)
+                  reportFiles: 'vulnerability.html',
+                  reportName: 'vulnerability')
 
                 }
 
