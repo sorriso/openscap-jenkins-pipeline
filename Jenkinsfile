@@ -70,7 +70,8 @@ pipeline {
                         sh('echo "CLEANUP DONE" ')
                         sh('docker pull alpine:latest')
                         sh('echo "PULL DONE" ')
-                        sh('echo "vulnerability.html" >  vulnerability.html')
+                        sh('mkdir -p scap ')
+                        sh('echo "vulnerability.html" >  ./scap/vulnerability.html')
                         sh('echo "CURRENT PATH" ')
                         sh('echo $(pwd) ')
                         sh('echo "LS" ')
@@ -93,7 +94,7 @@ pipeline {
                   publishHTML([allowMissing: false,
                   alwaysLinkToLastBuild: false,
                   keepAll: false,
-                  reportDir: '.',
+                  reportDir: 'scap',
                   reportFiles: vulnerability.html’,
                   reportName: vulnerability,
                   reportTitles: vulnerability-Report])
