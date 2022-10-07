@@ -75,7 +75,7 @@ pipeline {
                         sh('echo $(pwd) ')
                         sh('echo "LS" ')
                         sh('echo $(ls -al) ')
-                        
+
                     }
 
                 }
@@ -93,7 +93,7 @@ pipeline {
                   publishHTML([allowMissing: false,
                   alwaysLinkToLastBuild: false,
                   keepAll: false,
-                  reportDir: ‘source’,
+                  reportDir: '.',
                   reportFiles: vulnerability.html’,
                   reportName: vulnerability,
                   reportTitles: vulnerability-Report])
