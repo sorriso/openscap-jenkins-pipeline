@@ -72,7 +72,7 @@ pipeline {
                             echo "PULL DONE"
                             mkdir -p scap
                             export IMG_ID=$(podman images -q alpine:latest)
-                            oscap-podman $IMG_ID oval eval --report vulnerability.html /rhel-8.oval.xml
+                            oscap-podman $IMG_ID oval eval --report ./scap/vulnerability.html /rhel-8.oval.xml
                         '''
                     }
 
