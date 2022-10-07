@@ -73,7 +73,9 @@ pipeline {
                         sh('echo "vulnerability.html" >  vulnerability.html')
                         sh('echo "CURRENT PATH" ')
                         sh('echo $(pwd) ')
-
+                        sh('echo "LS" ')
+                        sh('echo $(ls -al) ')
+                        
                     }
 
                 }
@@ -91,7 +93,7 @@ pipeline {
                   publishHTML([allowMissing: false,
                   alwaysLinkToLastBuild: false,
                   keepAll: false,
-                  reportDir: ‘cve’,
+                  reportDir: ‘source’,
                   reportFiles: vulnerability.html’,
                   reportName: vulnerability,
                   reportTitles: vulnerability-Report])
