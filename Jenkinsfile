@@ -96,8 +96,7 @@ pipeline {
                   keepAll: false,
                   reportDir: 'scap',
                   reportFiles: vulnerability.html’,
-                  reportName: vulnerability,
-                  reportTitles: vulnerability-Report])
+                  reportName: vulnerability)
 
                 }
 
