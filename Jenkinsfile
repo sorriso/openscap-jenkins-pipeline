@@ -90,13 +90,14 @@ pipeline {
             steps {
 
                 dir("source") {
-
-                  publishHTML([allowMissing: false,
-                  alwaysLinkToLastBuild: false,
-                  keepAll: true,
-                  reportDir: 'scap',
-                  reportFiles: 'vulnerability.html',
-                  reportName: 'vulnerability')
+                    publishHTML([allowMissing: false,
+                                alwaysLinkToLastBuild: false,
+                                keepAll: false,
+                                reportDir: 'scap',
+                                reportFiles: 'vulnerability.html',
+                                reportName: 'OpenSCAP vulnerability Report',
+                                reportTitles: '',
+                                useWrapperFileDirectly: true])
 
                 }
 
