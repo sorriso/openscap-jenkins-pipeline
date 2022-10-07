@@ -28,9 +28,18 @@ pipeline {
                       memory: 256Mi
                   securityContext:
                     privileged: true
-                  volumeMounts:
-                  - name: var-run
-                    mountPath: /var/run
+                - name: podman
+                  image: l_docker:scap
+                  imagePullPolicy: IfNotPresent
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 3Gi
+                    requests:
+                      cpu: 10m
+                      memory: 256Mi
+                  securityContext:
+                    privileged: true
                 volumes:
                 - name: var-run
                   emptyDir: {}
@@ -49,22 +58,49 @@ pipeline {
 
     stages {
 
-        stage('Clean up docker workspace') {
+        stage('Build') {
 
             steps {
 
-                container('docker') {
+                dir("source") {
 
-                    sh('docker system prune -a -f')
-                    sh('echo "CLEANUP DONE" ')
-                    sh('docker pull alpine:latest')
-                    sh('echo "PULL DONE" ')
+                    container('docker') {
+
+                        sh('docker system prune -a -f')
+                        sh('echo "CLEANUP DONE" ')
+                        sh('docker pull alpine:latest')
+                        sh('echo "PULL DONE" ')
+                        sh('echo "vulnerability.html" >  vulnerability.html')
+
+                    }
 
                 }
 
             }
 
         }
+
+        stage ('Generate vulnerability report') {
+
+            dir("source") {
+
+              publishHTML (target: [
+
+                  allowMissing: true,
+
+                  alwaysLinkToLastBuild: true,
+
+                  keepAll: true,
+
+                  reportDir: 'target',
+
+                  reportFiles: 'vulnerability.html',
+
+                  reportName: "vulnerability-Report"
+
+                ])
+
+            }
 
     }
 
