@@ -99,8 +99,35 @@ pipeline {
                                 alwaysLinkToLastBuild: false,
                                 keepAll: false,
                                 reportDir: 'scap',
+                                reportFiles: 'hipaa.html',
+                                reportName: 'OpenSCAP hipaa Report',
+                                reportTitles: '',
+                                useWrapperFileDirectly: true])
+
+                    publishHTML([allowMissing: false,
+                                alwaysLinkToLastBuild: false,
+                                keepAll: false,
+                                reportDir: 'scap',
+                                reportFiles: 'ospp.html',
+                                reportName: 'OpenSCAP ospp Report',
+                                reportTitles: '',
+                                useWrapperFileDirectly: true])
+
+                    publishHTML([allowMissing: false,
+                                alwaysLinkToLastBuild: false,
+                                keepAll: false,
+                                reportDir: 'scap',
+                                reportFiles: 'pci-dss.html',
+                                reportName: 'OpenSCAP pci-dss Report',
+                                reportTitles: '',
+                                useWrapperFileDirectly: true])
+
+                    publishHTML([allowMissing: false,
+                                alwaysLinkToLastBuild: false,
+                                keepAll: false,
+                                reportDir: 'scap',
                                 reportFiles: 'oval.html',
-                                reportName: 'OpenSCAP vulnerability Report',
+                                reportName: 'OpenSCAP oval Report',
                                 reportTitles: '',
                                 useWrapperFileDirectly: true])
 
