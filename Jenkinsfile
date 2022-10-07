@@ -76,9 +76,9 @@ pipeline {
                             #wget https://www.redhat.com/security/data/metrics/com.redhat.rhsa-all.xccdf.xml > ./com.redhat.rhsa-all.xccdf.xml
                             #wget https://www.redhat.com/security/data/oval/com.redhat.rhsa-all.xml > ./com.redhat.rhsa-all.xml
 
-                            oscap-podman $IMG_ID xccdf eval --report hipaa.html --profile hipaa /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
-                            oscap-podman $IMG_ID xccdf eval --report ospp.html --profile ospp /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
-                            oscap-podman $IMG_ID xccdf eval --report pci-dss.html --profile pci-dss /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+                            oscap-podman $IMG_ID xccdf eval --report hipaa.html --profile hipaa /usr/share/xml/scap/ssg/content/ssg-rhel8-xccdf.xml
+                            oscap-podman $IMG_ID xccdf eval --report ospp.html --profile ospp /usr/share/xml/scap/ssg/content/ssg-rhel8-xccdf.xml
+                            oscap-podman $IMG_ID xccdf eval --report pci-dss.html --profile pci-dss /usr/share/xml/scap/ssg/content/ssg-rhel8-xccdf.xml
 
                             oscap-podman $IMG_ID oval eval --report ./scap/oval.html ./rhel-8.oval.xml
                         '''
