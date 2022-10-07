@@ -75,7 +75,7 @@ pipeline {
                             echo $IMG_ID
                             echo $(podman images)
                             echo "vulnerability.html" >  ./scap/vulnerability.html
-                            oscap-podman $IMG_ID oval eval --report vulnerability.html rhel-8.oval.xml
+                            oscap-podman $IMG_ID oval eval --report vulnerability.html /rhel-8.oval.xml
                         '''
                     }
 
