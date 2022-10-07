@@ -66,7 +66,7 @@ pipeline {
 
                     container('podman') {
 
-                        sh('podman system prune -a -f ') \
+                        sh('podman system prune -a -f ')
                         sh('echo "CLEANUP DONE" ')
                         sh('podman pull alpine:latest ')
                         sh('echo "PULL DONE" ')
